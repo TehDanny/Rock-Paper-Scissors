@@ -8,6 +8,7 @@ namespace Rock_Paper_Scissors
 {
     class Program
     {
+        private Game game;
         static void Main(string[] args)
         {
             Program myProgram = new Program();
@@ -26,15 +27,15 @@ namespace Rock_Paper_Scissors
 
             Console.Clear();
 
-            Game game = new Game(player1, player2);
+            game = new Game(player1, player2);
 
             game.GameMenu(player1);
-            game.Player1Choice = Console.ReadLine().ToLower();
-
+            game.Player1Choice = PlayerChoice();
+            
             Console.Clear();
 
             game.GameMenu(player2);
-            game.Player2Choice = Console.ReadLine().ToLower();
+            game.Player2Choice = PlayerChoice();
 
             Console.Clear();
 
@@ -49,6 +50,19 @@ namespace Rock_Paper_Scissors
             }
 
             Console.ReadLine();
+        }
+
+        private string PlayerChoice()
+        {
+            string userInput = Console.ReadLine().ToLower();
+            if (userInput == "rock" || userInput == "paper" || userInput == "scissors")
+            {
+                return userInput;
+            } else
+            {
+                Console.WriteLine("Invalid choice");
+                return PlayerChoice();
+            }
         }
     }
 }
